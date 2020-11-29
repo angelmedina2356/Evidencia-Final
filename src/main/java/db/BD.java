@@ -126,30 +126,62 @@ public class BD {
     }
 
     //Ver las citas que se agendaron//
-    public void verCitasAgendadas()throws SQLException{
-        String sql = "select c.id_citas, p.nombre , d.apellidop, f.fecha, f.hora  " +
-                "from citas c"+
-                "join paciente p on c.id_pacieinte = p.id_paciente"+
-                "join doctores d on c.id_doctores = d.id_doctores"+
-                "join horarios f on c.id_horarios = f.id_horarios";
+    public void verCitasAgendadas() throws SQLException {
+        String sql = "SELECT id_cita, id_doctores, id_paciente, id_horarios FROM citas";
+        try (Statement stmt = this.connection.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
 
-        try(Statement state3 =this.connection.createStatement(); ResultSet Result = state3.executeQuery(sql)){
-
-            while(Result.next()){
-                System.out.println(Result.getInt("id_cita") + " || " + Result.getString("nombre") +" || "+"Doc. "+
-                        Result.getString("apellidop") +" || "+ Result.getString("fecha") +" "+
-                        Result.getString("hora"));
+            while (rs.next()) {
+                System.out.println(rs.getInt("id_cita") +  "\t" +
+                        rs.getInt("id_doctores") + "\t" +
+                        rs.getInt("id_paciente") + "\t" +
+                        rs.getInt("id_horarios"));
             }
-
-        }catch (SQLException e){
-            System.out.println("Error al listar");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+    }
 
+    //Ver doctor con paciente//
+    public void verDoctorconPaciente() throws SQLException {
+        String sql = "SELECT id_doctores, id_paciente FROM citas";
+        try (Statement stmt = this.connection.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            while (rs.next()) {
+                System.out.println(
+                        rs.getString("id_doctores") + "\t" +
+                        rs.getString("id_paciente"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void verPacienteConDoctorCita() throws SQLException {
+        String sql = "SELECT id_paciente, id_doctores, id_horarios FROM citas";
+        try (Statement stmt = this.connection.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            while (rs.next()) {
+                System.out.println(
+                        rs.getString("id_paciente") + "\t" +
+                                rs.getString("id_doctores")+"\t"+
+                        rs.getString("id_horarios"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
-
-
-
-
 }
+
+
+
+
+
+
+
+
+

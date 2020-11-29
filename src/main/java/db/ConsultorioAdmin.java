@@ -27,11 +27,12 @@ public class ConsultorioAdmin {
                     System.out.println("(1) Dar de alta doctores.");
                     System.out.println("(2) Dar de alta pacientes.");
                     System.out.println("(3) Crear una cita con fecha y hora.");
-                    System.out.println("(4) Relacionar una cita con un doctor y un paciente");
+                    System.out.println("(4) Ver Doctores con sus Pacientes");
                     System.out.println("(5) Listar doctores");
                     System.out.println("(6) Listar horarios");
                     System.out.println("(7) Listar pacientes");
                     System.out.println("(8) Ver citas agendadas");
+                    System.out.println("(9) Ver Pacientes con sus Doctores y sus citas");
                     System.out.println("(0) Salir");
                     System.out.println("\nPor favor ingrese una opción: ");
                     // Fin de Menu
@@ -88,7 +89,14 @@ public class ConsultorioAdmin {
 
                                 break;
                             case 4:
-
+                                System.out.println("Doctres");
+                                persist.verDoctores();
+                                System.out.println("");
+                                System.out.println("Pacientes");
+                                persist.verPacientes();
+                                System.out.println("");
+                                System.out.println("Doctores y sus pacientes");
+                                persist.verDoctorconPaciente();
                                 break;
                             case 5:
                                 persist.verDoctores();
@@ -101,6 +109,17 @@ public class ConsultorioAdmin {
                                 break;
                             case 8:
                                 persist.verCitasAgendadas();
+                            case 9:
+                                System.out.println("Pacientes");
+                                persist.verPacientes();
+                                System.out.println("");
+                                System.out.println("Doctores");
+                                persist.verDoctores();
+                                System.out.println("");
+                                System.out.println("Horarios");
+                                persist.verHorariosDeCitas();
+                                System.out.println("");
+                                persist.verPacienteConDoctorCita();
                             default:
                                 System.err.println("Opción inválida.");
                                 logger.error("Opción inválida: {}", seleccion);
